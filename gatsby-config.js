@@ -38,5 +38,11 @@ module.exports = {
         defaultQuality: 75,
       },
     },
+    {
+      resolve: 'gatsby-plugin-load-script',
+      options: {
+        src: '/src/js/main.js',
+      },
+    },
   ],
 }

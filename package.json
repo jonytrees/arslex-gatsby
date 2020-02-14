@@ -15,14 +15,17 @@
   },
   "dependencies": {
     "gatsby": "^2.19.7",
+    "gatsby-plugin-load-script": "^1.0.6",
     "gatsby-plugin-sharp": "^2.4.5",
     "gatsby-source-filesystem": "^2.1.48",
     "gatsby-transformer-pdf": "^1.1.26",
     "gatsby-transformer-sharp": "^2.3.14",
+    "jquery": "^3.4.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
   "devDependencies": {
+    "eslint-plugin-react-hooks": "^2.3.0",
     "prettier": "^1.19.1"
   },
   "repository": {

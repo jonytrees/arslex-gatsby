@@ -42,16 +42,17 @@ body { height: 100%; width: 100%; }
                 .logo img { max-width:100%; }
             .topmenu { position:absolute; top:39px; right:0px; }
                 .topmenu > li { float:left; }
-                    .topmenu > li > span { padding:27px 36px; line-height:54px; color: #c1c1c1; font-weight:600; font-size: 16px; -webkit-transition:0.5s; -moz-transition:0.5s; -o-transition:0.5s; transition:0.5s; cursor:pointer; }
-                    .topmenu > li > span:hover { color:#fff; }
+                    .topmenu > li > a { padding:27px 36px; line-height:54px; color: #c1c1c1; font-weight:600; font-size: 16px; -webkit-transition:0.5s; -moz-transition:0.5s; -o-transition:0.5s; transition:0.5s; cursor:pointer; }
+                    .topmenu > li > a:hover { color:#fff; }
 
         .toptext { position:relative; margin:0 auto; padding-top:310px; max-width:1280px; }
             .toptext > p.welcome-text { font-size: 38px; line-height: 38px; color: #b6a281; letter-spacing: 2px; text-align:center; border-bottom:1px solid #b6a281; display:table; margin:0 auto; padding-bottom:5px; text-transform:uppercase; }
             .toptext > h1 { text-align:center; font-size: 102px; line-height: 102px; font-weight: 700; color: #fff; letter-spacing: 4px; padding:20px; text-transform:uppercase; }
             .toptext > h1 + p { font-size: 20px; line-height: 38px; font-weight: 500; color:#dedede; text-align:center; }
-                .toptext-button { display:table; margin: 30px auto 0; background: #83663e; background: -moz-linear-gradient(top,  #83663e 0%, #b0966a 100%); background: -webkit-linear-gradient(top,  #83663e 0%,#b0966a 100%); background: linear-gradient(to bottom,  #83663e 0%,#b0966a 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#83663e', endColorstr='#b0966a',GradientType=0 ); border-radius:8px; cursor:pointer; }
+                .toptext-button { color: #fff !important; display:table; margin: 30px auto 0; background: #83663e; background: -moz-linear-gradient(top,  #83663e 0%, #b0966a 100%); background: -webkit-linear-gradient(top,  #83663e 0%,#b0966a 100%); background: linear-gradient(to bottom,  #83663e 0%,#b0966a 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#83663e', endColorstr='#b0966a',GradientType=0 ); border-radius:8px; cursor:pointer; }
                 .toptext-button:hover { background:#b0966a; }
                     .toptext-button > p { font-size: 12px; line-height: 48px; font-weight: 700; color:#fff; letter-spacing: 2px; text-transform:uppercase; padding:0 40px 0 20px; position:relative; }
+                    .toptext-button > p > a { color: #fff !important; line-height: 48px; display: block; height: 48px; }
                     .toptext-button > p:before { position:absolute; content:''; width:17px; height:8px; background:url('../img/arrow.png'); right:15px; top:calc(50% - 4px); }
             .toptext-desc { background:rgba(0,0,0,.5); display: table; max-width: 50%; margin: 50px auto 0; }
                 .toptext-desc > p { color:#c9c9c9; font-size: 15px; line-height:25px; padding:30px 50px; }
