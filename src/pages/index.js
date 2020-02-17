@@ -1,7 +1,6 @@
 import React from "react"
 import {Link} from "gatsby"
 import {Helmet} from "react-helmet"
-import axios from "axios";
 import Form from "../components/Form"
 import "../css/style.css"
 import "../css/fonts/fonts.css"
@@ -12,28 +11,6 @@ import Mauritius from "../img/mauritius.jpg"
 import PDF from "../components/PDF.js"
 import $ from "jquery"
 
-
-/**
- * @config prepareing config prop.
- */
-const config = {
-  api: `${process.env.REACT_APP_API}`,
-  title: 'Contact Me',
-  successMessage: 'Thank you for contcting me.',
-  errorMessage: 'Sorry we have some problems.',
-  fields:{
-    firstName: '',
-    lastName: '',
-    email: '',
-    msg: ''
-  },
-  fieldsConfig:  [
-   { id: 1, label: 'First Name', fieldName: 'firstName', type: 'text',placeholder:'Your First Name', isRequired: true , klassName:'first-name-field'},
-   { id: 2, label: 'Last Name', fieldName: 'lastName', type: 'text', placeholder: 'Your Last Name', isRequired: true , klassName:'last-name-field'},
-   { id: 3, label: 'Email', fieldName: 'email', type: 'email', placeholder: ' Your Email', isRequired: true , klassName:'email-field'},
-   { id: 4, label: 'Message', fieldName: 'msg', type: 'textarea',placeholder:'Write something.....', isRequired: true , klassName:'message-field'}
-  ]
-}
 
 class Basic extends React.Component {
 
@@ -195,7 +172,7 @@ class Basic extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <Form config={config} />
+                    <Form />
                     <div className="upfooter-wrapper">
                         <div className="upfooter">
                             <p><strong>Legal information:</strong> The information provided on the Ars Lex website is offered purely for informational purposes. The information be found on this website is intended to provide you with information on current topics of general legal, business, or legal advisory services. If you need legal advice, you should seek the advice of a licensed attorney. Nothing on this website is intended to create, offer, or promote an attorney-client relationship. An attorney-client relationship with any attorney at the firm can only be formed through a written fee agreement signed by you and a partner of the firm. Please note, the information be found on this website do not constitute a guarantee, warranty, or prediction of the outcome of your legal matter.</p>

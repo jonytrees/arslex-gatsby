@@ -1,59 +1,50 @@
 import React from "react"
-import axios from "axios"
-
-/**
- * @component Form
- * @props - { object } -  config
- */
+import { withPrefix } from 'gatsby'
+import $ from 'jquery'
 
 class Form extends React.Component {
-  constructor(props) {
-   super(props);
-   this.state = {
-     mailSent: false,
-     error: null
-   };
- }
- /**
- * @function handleFormSubmit
- * @param e { obj } - form event
- * @return void
- */
 
- handleFormSubmit = e => {
-   e.preventDefault()
-   axios({
-        method: "post",
-        url: `${process.env.REACT_APP_API}`,
-        headers: { "content-type": "application/json" },
-        data: this.state
+  handleInputChange = event => {
+    // Check if name input contains text.
+    // Don't test email, yet.
+    if (event.target.value.length > 0 && event.target.name !== 'email') {
+      this.setState({
+        [event.target.name]: event.target.value
       })
-        .then(result => {
-          if (result.data.sent) {
-            this.setState({
-              mailSent: result.data.sent
-            });
-            this.setState({ error: false });
-          } else {
-            this.setState({ error: true });
-          }
+    }
+
+    // Run a simple test to validate email address
+    if (event.target.name === 'email') {
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+      if (re.test(String(event.target.value).toLowerCase())) {
+        this.setState({
+          [event.target.name]: event.target.value
         })
-        .catch(error => this.setState({ error: error.message }));
- };
+      }
+    }
+  }
 
- /**
-     * @function handleChange
-     * @param e { obj } - change event
-     * @param field { string } - namve of the field
-     * @return void
-     */
+  // Method to handle form submission
+  handleFormSubmit = event => {
+    event.preventDefault()
 
- handleChange = (e, field) => {
-   let value = e.target.value;
-   let updateValue = {};
-   updateValue[field] = value;
-   this.setState(updateValue);
- };
+    // Test required fields - email and name
+    if (this.state.email.length > 0 && this.state.name.length > 0) {
+      // Send the data with Ajax and jQuery
+      $.ajax({
+        data: this.state,
+        type: 'POST',
+        url: withPrefix('/sendEmail.php'), // use 'withPrefix' module from 'gatsby' to reference 'sendEmail.php' in 'static' folder.
+        success: function(data) {
+          console.info(data)
+        },
+        error: function(xhr, status, err) {
+          console.error(status, err.toString())
+        }
+      })
+    }
+  }
 
 
   render(){
@@ -65,7 +56,7 @@ class Form extends React.Component {
               <p>Get in touch</p>
               <p>Complete the below form and one of our experts will contact you within 48 hours.</p>
               <div className="form">
-                  <form action="#sendpage" method="post" onSubmit={e => this.handleFormSubmit(e)}>
+                  <form action="#sendpage" method="post">
                       <div className="form-blocks">
                           <div className="form-double">
                               <div className="form-div">
@@ -96,7 +87,7 @@ class Form extends React.Component {
                               <textarea name="message" id="message" className="required"></textarea>
                               <label htmlFor="message">Please describe your requirements*</label>
                           </div>
-                          <input type="button" name="submit" value="Submit"  id="submit" className="redgrad" />
+                          <input type="button" name="submit" value="Submit" onClick={this.handleFormSubmit} id="submit" className="redgrad" />
                           <div className="form-mess"></div>
                       </div>
                   </form>
