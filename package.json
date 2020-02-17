@@ -31,6 +31,7 @@
     "@babel/plugin-syntax-object-rest-spread": "file:node_modules/@babel/plugin-syntax-object-rest-spread",
     "@babel/plugin-transform-destructuring": "file:node_modules/@babel/plugin-transform-destructuring",
     "@babel/plugin-transform-literals": "file:node_modules/@babel/plugin-transform-literals",
+    "@babel/plugin-transform-new-target": "file:node_modules/@babel/plugin-transform-new-target",
     "eslint-plugin-react-hooks": "^2.3.0",
     "prettier": "^1.19.1"
   },
