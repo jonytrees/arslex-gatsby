@@ -1,7 +1,7 @@
 import React from "react"
 import {Link} from "gatsby"
 import {Helmet} from "react-helmet"
-import { withPrefix } from "gatsby"
+import axios from "axios";
 import "../css/style.css"
 import "../css/fonts/fonts.css"
 import Logo from "../img/logo.png"
@@ -20,23 +20,33 @@ class Basic extends React.Component {
     });
   }
 
-  handleFormSubmit = event => {
-    event.preventDefault()
-
-    if (this.state.email.length > 0 && this.state.name.length > 0) {
-      $.ajax({
-        data: this.state,
-        type: 'POST',
-        url: withPrefix('/sendEmail.php'),
-        success: function(data) {
-          console.info(data)
-        },
-        error: function(xhr, status, err) {
-          console.error(status, err.toString())
-        }
-      })
-    }
+  handleFormSubmit = e => {
+    e.preventDefault()
+    axios({
+         method: "post",
+         url: `${process.env.REACT_APP_API}`,
+         headers: { "content-type": "application/json" },
+         data: this.state
+       })
+         .then(result => {
+           if (result.data.sent) {
+             this.setState({
+               mailSent: result.data.sent
+             });
+             this.setState({ error: false });
+           } else {
+             this.setState({ error: true });
+           }
+         })
+         .catch(error => this.setState({ error: error.message }));
   }
+
+  handleChange = (e, field) => {
+    let value = e.target.value;
+    let updateValue = {};
+    updateValue[field] = value;
+    this.setState(updateValue);
+  };
 
     render(){
       return (
@@ -226,7 +236,7 @@ class Basic extends React.Component {
                                             <textarea name="message" id="message" className="required"></textarea>
                                             <label htmlFor="message">Please describe your requirements*</label>
                                         </div>
-                                        <input type="button" name="submit" value="Submit" onClick={this.handleFormSubmit} id="submit" className="redgrad" />
+                                        <input type="button" name="submit" value="Submit" onClick={e => this.handleFormSubmit(e)} id="submit" className="redgrad" />
                                         <div className="form-mess"></div>
                                     </div>
                                 </form>

@@ -27,7 +27,7 @@
             $textz = tst($_POST['message']);
 
             if (!empty($fio) and !empty($company) and !empty($phone) and !empty($email)) {
-                require $_SERVER['DOCUMENT_ROOT'].'/phpmail/PHPMailerAutoload.php';
+                require $_SERVER['DOCUMENT_ROOT'].'./phpmail/PHPMailerAutoload.php';
 
                 $mail = new PHPMailer;
 
