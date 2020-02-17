@@ -2,6 +2,7 @@ import React from "react"
 import {Link} from "gatsby"
 import {Helmet} from "react-helmet"
 import axios from "axios";
+import Form from "../components/Form"
 import "../css/style.css"
 import "../css/fonts/fonts.css"
 import Logo from "../img/logo.png"
@@ -12,6 +13,28 @@ import PDF from "../components/PDF.js"
 import $ from "jquery"
 
 
+/**
+ * @config prepareing config prop.
+ */
+const config = {
+  api: `${process.env.REACT_APP_API}`,
+  title: 'Contact Me',
+  successMessage: 'Thank you for contcting me.',
+  errorMessage: 'Sorry we have some problems.',
+  fields:{
+    firstName: '',
+    lastName: '',
+    email: '',
+    msg: ''
+  },
+  fieldsConfig:  [
+   { id: 1, label: 'First Name', fieldName: 'firstName', type: 'text',placeholder:'Your First Name', isRequired: true , klassName:'first-name-field'},
+   { id: 2, label: 'Last Name', fieldName: 'lastName', type: 'text', placeholder: 'Your Last Name', isRequired: true , klassName:'last-name-field'},
+   { id: 3, label: 'Email', fieldName: 'email', type: 'email', placeholder: ' Your Email', isRequired: true , klassName:'email-field'},
+   { id: 4, label: 'Message', fieldName: 'msg', type: 'textarea',placeholder:'Write something.....', isRequired: true , klassName:'message-field'}
+  ]
+}
+
 class Basic extends React.Component {
 
   componentDidMount() {
@@ -20,33 +43,6 @@ class Basic extends React.Component {
     });
   }
 
-  handleFormSubmit = e => {
-    e.preventDefault()
-    axios({
-         method: "post",
-         url: `${process.env.REACT_APP_API}`,
-         headers: { "content-type": "application/json" },
-         data: this.state
-       })
-         .then(result => {
-           if (result.data.sent) {
-             this.setState({
-               mailSent: result.data.sent
-             });
-             this.setState({ error: false });
-           } else {
-             this.setState({ error: true });
-           }
-         })
-         .catch(error => this.setState({ error: error.message }));
-  }
-
-  handleChange = (e, field) => {
-    let value = e.target.value;
-    let updateValue = {};
-    updateValue[field] = value;
-    this.setState(updateValue);
-  };
 
     render(){
       return (
@@ -199,50 +195,7 @@ class Basic extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div className="contactus-wrapper" id="sendpage">
-                        <div className="contactus">
-                            <h2>Feedback notice:</h2>
-                            <p>Get in touch</p>
-                            <p>Complete the below form and one of our experts will contact you within 48 hours.</p>
-                            <div className="form">
-                                <form action="#sendpage" method="post">
-                                    <div className="form-blocks">
-                                        <div className="form-double">
-                                            <div className="form-div">
-                                                <input type="text" name="fio" id="fio" className="required" />
-                                                <label htmlFor="fio">Full Name*</label>
-                                            </div>
-                                            <div className="form-div">
-                                                <input type="text" name="phone" id="phone" />
-                                                <label htmlFor="phone">Phone</label>
-                                            </div>
-                                            <div className="clear"></div>
-                                        </div>
-                                        <div className="form-double">
-                                            <div className="form-div">
-                                                <select name="type" id="type" className="required">
-                                                    <option value="CYPRUS">CYPRUS</option>
-                                                    <option value="SAINT VINCENT &amp; THE GRENADINES">SAINT VINCENT &amp; THE GRENADINES</option>
-                                                    <option value="MAURITIUS">MAURITIUS</option>
-                                                </select>
-                                            </div>
-                                            <div className="form-div">
-                                                <input type="text" name="email" id="email" className="required" />
-                                                <label htmlFor="email">Email*</label>
-                                            </div>
-                                            <div className="clear"></div>
-                                        </div>
-                                        <div className="form-div">
-                                            <textarea name="message" id="message" className="required"></textarea>
-                                            <label htmlFor="message">Please describe your requirements*</label>
-                                        </div>
-                                        <input type="button" name="submit" value="Submit" onClick={e => this.handleFormSubmit(e)} id="submit" className="redgrad" />
-                                        <div className="form-mess"></div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                    <Form config={config} />
                     <div className="upfooter-wrapper">
                         <div className="upfooter">
                             <p><strong>Legal information:</strong> The information provided on the Ars Lex website is offered purely for informational purposes. The information be found on this website is intended to provide you with information on current topics of general legal, business, or legal advisory services. If you need legal advice, you should seek the advice of a licensed attorney. Nothing on this website is intended to create, offer, or promote an attorney-client relationship. An attorney-client relationship with any attorney at the firm can only be formed through a written fee agreement signed by you and a partner of the firm. Please note, the information be found on this website do not constitute a guarantee, warranty, or prediction of the outcome of your legal matter.</p>
