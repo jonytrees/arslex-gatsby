@@ -13,7 +13,8 @@ module.exports = {
     // The following sets up the Jekyll pattern of having a
     // "pages" directory for Markdown files and a "data" directory
     // for `.json`, `.yaml`, `.csv`.
-    `gatsby-plugin-sharp`, `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
