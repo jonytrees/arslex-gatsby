@@ -27,6 +27,10 @@
     "react-helmet": "^5.2.1"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-dynamic-import": "file:node_modules/@babel/plugin-proposal-dynamic-import",
+    "@babel/plugin-syntax-object-rest-spread": "file:node_modules/@babel/plugin-syntax-object-rest-spread",
+    "@babel/plugin-transform-destructuring": "file:node_modules/@babel/plugin-transform-destructuring",
+    "@babel/plugin-transform-literals": "file:node_modules/@babel/plugin-transform-literals",
     "eslint-plugin-react-hooks": "^2.3.0",
     "prettier": "^1.19.1"
   },
