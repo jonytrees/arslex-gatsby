@@ -30,6 +30,7 @@ module.exports = {
       },
     },
     `gatsby-transformer-pdf`,
+    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-sharp`,
       options: {

@@ -1,5 +1,7 @@
 import React from "react"
 import {Link} from "gatsby"
+import {Helmet} from "react-helmet"
+import { withPrefix } from "gatsby"
 import "../css/style.css"
 import "../css/fonts/fonts.css"
 import Logo from "../img/logo.png"
@@ -18,9 +20,32 @@ class Basic extends React.Component {
     });
   }
 
+  handleFormSubmit = event => {
+    event.preventDefault()
+
+    if (this.state.email.length > 0 && this.state.name.length > 0) {
+      $.ajax({
+        data: this.state,
+        type: 'POST',
+        url: withPrefix('/sendEmail.php'),
+        success: function(data) {
+          console.info(data)
+        },
+        error: function(xhr, status, err) {
+          console.error(status, err.toString())
+        }
+      })
+    }
+  }
+
     render(){
       return (
           <>
+          <Helmet>
+          <meta charSet="utf-8" />
+          <title>Ars Lex Limited</title>
+          <link rel="canonical" href="http://mysite.com/example" />
+        </Helmet>
           <div className="box">
                     <div className="toptext-wrapper">
                         <div className="topline-wrapper" id="link1">
@@ -201,7 +226,7 @@ class Basic extends React.Component {
                                             <textarea name="message" id="message" className="required"></textarea>
                                             <label htmlFor="message">Please describe your requirements*</label>
                                         </div>
-                                        <input type="button" name="submit" value="Submit" id="submit" className="redgrad" />
+                                        <input type="button" name="submit" value="Submit" onClick={this.handleFormSubmit} id="submit" className="redgrad" />
                                         <div className="form-mess"></div>
                                     </div>
                                 </form>

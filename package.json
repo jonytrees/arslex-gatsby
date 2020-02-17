@@ -16,13 +16,15 @@
   "dependencies": {
     "gatsby": "^2.19.7",
     "gatsby-plugin-load-script": "^1.0.6",
+    "gatsby-plugin-react-helmet": "^3.1.22",
     "gatsby-plugin-sharp": "^2.4.5",
     "gatsby-source-filesystem": "^2.1.48",
     "gatsby-transformer-pdf": "^1.1.26",
     "gatsby-transformer-sharp": "^2.3.14",
     "jquery": "^3.4.1",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "react-helmet": "^5.2.1"
   },
   "devDependencies": {
     "eslint-plugin-react-hooks": "^2.3.0",
