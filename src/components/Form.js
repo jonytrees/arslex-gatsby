@@ -4,6 +4,12 @@ import $ from 'jquery'
 
 class Form extends React.Component {
 
+  state = {
+    email: '',
+    message: '',
+    name: ''
+  }
+
   handleInputChange = event => {
     // Check if name input contains text.
     // Don't test email, yet.
@@ -30,12 +36,12 @@ class Form extends React.Component {
     event.preventDefault()
 
     // Test required fields - email and name
-    if (this.state.email.length > 0 && this.state.name.length > 0) {
+    if (this.state.phone.length > 0 && this.state.fio.length > 0) {
       // Send the data with Ajax and jQuery
       $.ajax({
         data: this.state,
         type: 'POST',
-        url: withPrefix('/sendEmail.php'), // use 'withPrefix' module from 'gatsby' to reference 'sendEmail.php' in 'static' folder.
+        url: withPrefix('../pages/sendEmail.php'),
         success: function(data) {
           console.info(data)
         },
@@ -60,11 +66,11 @@ class Form extends React.Component {
                       <div className="form-blocks">
                           <div className="form-double">
                               <div className="form-div">
-                                  <input type="text" name="fio" id="fio" className="required" />
+                                  <input onChange={this.handleInputChange} type="text" name="fio" id="fio" className="required" required={true} />
                                   <label htmlFor="fio">Full Name*</label>
                               </div>
                               <div className="form-div">
-                                  <input type="text" name="phone" id="phone" />
+                                  <input onChange={this.handleInputChange} type="text" name="phone" id="phone" required={true} />
                                   <label htmlFor="phone">Phone</label>
                               </div>
                               <div className="clear"></div>
