@@ -41,7 +41,7 @@ class Form extends React.Component {
       $.ajax({
         data: this.state,
         type: 'POST',
-        url: withPrefix('../pages/sendEmail.php'),
+        url: withPrefix('./sendEmail.php'),
         success: function(data) {
           console.info(data)
         }
