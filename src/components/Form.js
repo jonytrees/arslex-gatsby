@@ -44,9 +44,6 @@ class Form extends React.Component {
         url: withPrefix('../pages/sendEmail.php'),
         success: function(data) {
           console.info(data)
-        },
-        error: function(xhr, status, err) {
-          console.error(status, err.toString())
         }
       })
     }
