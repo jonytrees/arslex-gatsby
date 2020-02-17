@@ -65,7 +65,7 @@ class Form extends React.Component {
               <p>Get in touch</p>
               <p>Complete the below form and one of our experts will contact you within 48 hours.</p>
               <div className="form">
-                  <form action="#sendpage" method="post">
+                  <form action="#sendpage" method="post" onSubmit={e => this.handleFormSubmit(e)}>
                       <div className="form-blocks">
                           <div className="form-double">
                               <div className="form-div">
@@ -96,7 +96,7 @@ class Form extends React.Component {
                               <textarea name="message" id="message" className="required"></textarea>
                               <label htmlFor="message">Please describe your requirements*</label>
                           </div>
-                          <input type="button" name="submit" value="Submit" onClick={e => this.handleFormSubmit(e)} id="submit" className="redgrad" />
+                          <input type="button" name="submit" value="Submit"  id="submit" className="redgrad" />
                           <div className="form-mess"></div>
                       </div>
                   </form>
