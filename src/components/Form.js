@@ -1,54 +1,39 @@
 import React from "react"
-import { withPrefix } from 'gatsby'
-import $ from 'jquery'
+import axios from 'axios';
+
 
 class Form extends React.Component {
 
-  state = {
-    email: '',
-    message: '',
-    name: ''
+  constructor(props) {
+ 	super(props);
+   	this.state = {
+     	name: '',
+      phone: '',
+     	email: '',
+     	message: ''
+   	}
   }
 
-  handleInputChange = event => {
-    // Check if name input contains text.
-    // Don't test email, yet.
-    if (event.target.value.length > 0 && event.target.name !== 'email') {
-      this.setState({
-        [event.target.name]: event.target.value
-      })
-    }
-
-    // Run a simple test to validate email address
-    if (event.target.name === 'email') {
-      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-
-      if (re.test(String(event.target.value).toLowerCase())) {
-        this.setState({
-          [event.target.name]: event.target.value
-        })
+   handleSubmit(e){
+    e.preventDefault();
+    axios({
+      method: "POST",
+      url:"http://localhost:8000/send",
+      data:  this.state
+    }).then((response)=>{
+      if (response.data.status === 'success'){
+        alert("Message Sent.");
+        this.resetForm()
+      }else if(response.data.status === 'fail'){
+        alert("Message failed to send.")
       }
-    }
+    })
   }
 
-  // Method to handle form submission
-  handleFormSubmit = event => {
-    event.preventDefault()
+  resetForm(){
 
-    // Test required fields - email and name
-    if (this.state.phone.length > 0 && this.state.fio.length > 0) {
-      // Send the data with Ajax and jQuery
-      $.ajax({
-        data: this.state,
-        type: 'POST',
-        url: withPrefix('./sendEmail.php'),
-        success: function(data) {
-          console.info(data)
-        }
-      })
-    }
+     this.setState({name: '', phone: '', email: '', message: ''})
   }
-
 
   render(){
     return(
@@ -59,15 +44,15 @@ class Form extends React.Component {
               <p>Get in touch</p>
               <p>Complete the below form and one of our experts will contact you within 48 hours.</p>
               <div className="form">
-                  <form action="#sendpage" method="post">
+                  <form action="#sendpage" onSubmit={this.handleSubmit.bind(this)} method="post">
                       <div className="form-blocks">
                           <div className="form-double">
                               <div className="form-div">
-                                  <input onChange={this.handleInputChange} type="text" name="fio" id="fio" className="required" required={true} />
+                                  <input type="text" name="fio" id="fio" value={this.state.name} onChange={this.onNameChange.bind(this)} className="required" />
                                   <label htmlFor="fio">Full Name*</label>
                               </div>
                               <div className="form-div">
-                                  <input onChange={this.handleInputChange} type="text" name="phone" id="phone" required={true} />
+                                  <input type="text" name="phone" id="phone" value={this.state.phone} onChange={this.onPhoneChange.bind(this)} />
                                   <label htmlFor="phone">Phone</label>
                               </div>
                               <div className="clear"></div>
@@ -81,16 +66,16 @@ class Form extends React.Component {
                                   </select>
                               </div>
                               <div className="form-div">
-                                  <input type="text" name="email" id="email" className="required" />
+                                  <input type="text" name="email" id="email" value={this.state.email} onChange={this.onEmailChange.bind(this)} className="required" />
                                   <label htmlFor="email">Email*</label>
                               </div>
                               <div className="clear"></div>
                           </div>
                           <div className="form-div">
-                              <textarea name="message" id="message" className="required"></textarea>
+                              <textarea name="message" id="message" value={this.state.message} onChange={this.onMessageChange.bind(this)} className="required"></textarea>
                               <label htmlFor="message">Please describe your requirements*</label>
                           </div>
-                          <input type="button" name="submit" value="Submit" onClick={this.handleFormSubmit} id="submit" className="redgrad" />
+                          <input type="button" name="submit" value="Submit" id="submit" className="redgrad" />
                           <div className="form-mess"></div>
                       </div>
                   </form>
@@ -100,6 +85,22 @@ class Form extends React.Component {
       </>
     )
   }
+
+  onNameChange(event) {
+  	this.setState({name: event.target.value})
+    }
+
+    onPhoneChange(event) {
+    	this.setState({phone: event.target.value})
+      }
+
+    onEmailChange(event) {
+  	this.setState({email: event.target.value})
+    }
+
+    onMessageChange(event) {
+  	this.setState({message: event.target.value})
+    }
 }
 
 export default Form
